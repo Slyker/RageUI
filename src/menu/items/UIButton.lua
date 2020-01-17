@@ -91,7 +91,9 @@ function RageUI.Button(Label, Description, Style, Enabled, Callback, Submenu)
 
                 RageUI.ItemOffset = RageUI.ItemOffset + SettingsButton.Rectangle.Height
 
-                RageUI.ItemsDescription(CurrentMenu, Description, Selected);
+                if Description ~= "" then
+                    RageUI.ItemsDescription(CurrentMenu, Description, Selected);
+                end
 
                 if (Enabled) then
                     Callback(Hovered, Selected, ((CurrentMenu.Controls.Select.Active or (Hovered and CurrentMenu.Controls.Click.Active)) and Selected))
@@ -190,7 +192,9 @@ function RageUI.CenterButton(Label, Description, Style, Enabled, Callback, Subme
 
                 RageUI.ItemOffset = RageUI.ItemOffset + SettingsButton.Rectangle.Height
 
-                RageUI.ItemsDescription(CurrentMenu, Description, Selected);
+                if Description ~= "" then
+                    RageUI.ItemsDescription(CurrentMenu, Description, Selected);
+                end
 
                 if (Enabled) then
                     Callback(Hovered, Selected, ((CurrentMenu.Controls.Select.Active or (Hovered and CurrentMenu.Controls.Click.Active)) and Selected))
