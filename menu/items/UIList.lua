@@ -146,14 +146,16 @@ function RageUI.Item.List(Label, Items, StartedAtIndex, Description, Style, Enab
                 if Selected and (CurrentMenu.Controls.Select.Active or ((Hovered and CurrentMenu.Controls.Click.Active) and (not LeftArrowHovered and not RightArrowHovered))) then
                     local Audio = RageUI.Settings.Audio
                     RageUI.PlaySound(Audio[Audio.Use].Select.audioName, Audio[Audio.Use].Select.audioRef)
-                    Citizen.CreateThread(function()
-                        Actions.onSelected(Index[Option].Current, Items[Index[Option].Current]);
-                    end)
+                    if Actions.onSelected ~= nil then
+                        Citizen.CreateThread(function()
+                            Actions.onSelected(Index[Option].Current, Items[Index[Option].Current]);
+                        end)
+                    end
                     if Submenu ~= nil and type(Submenu) == "table" then
                         RageUI.NextMenu = Submenu[Index[Option].Current]
                     end
                 end
-                if (Enabled) then
+                if (Enabled) and Actions.onHovered ~= nil then
                     Actions.onHovered(Index[Option].Current, Items[Index[Option].Current])
                 end
             end
